@@ -6,6 +6,18 @@ import dash_html_components as html
 import plotly.graph_objs as go
 
 
+#Reading From a Database
+# Connect to sqlite db
+db_file = os.path.join(os.path.dirname(wb.fullname), 'events.db')
+engine = create_engine(r"sqlite:///{}".format(db_file))
+  data = pd.read_sql(sql, engine)
+  # Read query directly into a dataframe
+  # Create SQL query
+sql = 'SELECT * from table WHERE x="{}" AND date BETWEEN "{}" AND "{}"'.format()
+  
+# else
+# Read in the data from Excel
+
 df = pd.read_excel("data.xlsx")
 df.rename(columns={'Event Type': 'Event_Type'}, inplace=True)
 df = df[(df['Event_Type'] == 'External Inspection') | (df['Event_Type'] == 'Internal Inspection') | (
